@@ -10,12 +10,12 @@ document.addEventListener('login', async () => {
 	roomListElem.innerHTML = '';
 	response.rooms.forEach(room => {
 		roomListElem.innerHTML += `
-<li class="p-2 border-bottom">
-	<a href="#!" class="d-flex justify-content-between">
+<li class="p-2 border-bottom room-button" data-id="${room.id}">
+	<a href="javascript:void(0)" class="d-flex justify-content-between">
 		<div class="d-flex flex-row">
 			<div>
 				<img
-					src="${room.id === "MAIN" ? 'http://localhost:5000/static/logo.svg' : window.getAvatarURL(room.id.charCodeAt(0))}"
+					src="${room.id.length < 15 ? 'http://localhost:5000/static/logo.svg' : window.getAvatarURL(room.id.charCodeAt(0))}"
 					alt="avatar" class="d-flex align-self-center me-3" width="60">
 				<span class="badge bg-warning badge-dot"></span>
 			</div>
@@ -28,6 +28,12 @@ document.addEventListener('login', async () => {
 </li>
 `;
 	});
+
+	document.querySelectorAll('.room-button').forEach(elem => elem.addEventListener('click', event => {
+		const roomID = event.currentTarget.dataset.id;
+
+		switchToSelectedRoom(roomID);
+	}));
 
 	chatBoxAvatarElem.src = window.getAvatarURL(window.USER_SESSION.id.charCodeAt(0));
 
@@ -76,10 +82,10 @@ async function switchToSelectedRoom(roomID) {
 	currentRoomID = roomID;
 	const messageBoxElem = document.querySelector('#messageBox');
 
+	messageBoxElem.innerHTML = '';
+
 	const response = await window.Fetch('/room/' + roomID);
 	const room = response.room;
-
-	messageBoxElem.innerHTML = '';
 
 	for(const message of room.messages) {
 		appendChatMessageToBox(

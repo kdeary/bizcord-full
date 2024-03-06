@@ -34,6 +34,17 @@ def getRooms():
 def getRoom(room_id):
 	return roomsTable.get(Room.id == room_id)
 
+def createRoom(room_name):
+	newUser = {
+		'id': str(uuid.uuid1()),
+		'name': room_name,
+		'members': [],
+		'room_ids': []
+	}
+	usersTable.insert(newUser)
+
+	return newUser
+
 def sendChatMessage(room_id, user_session_token, message):
 	foundRoom = getRoom(room_id)
 	author = getUserBySessionToken(user_session_token)
@@ -56,4 +67,18 @@ if len(roomsTable.search(Room.id == 'MAIN')) == 0:
 		'name': 'Main Lobby',
 		'members': [],
 		'messages': [createMessageObject('ADMIN', 'Admin', 'Welcome to the Main Lobby!')]
+	})
+
+	roomsTable.insert({
+		'id': 'OTHER',
+		'name': 'Other Lobby',
+		'members': [],
+		'messages': [createMessageObject('ADMIN', 'Admin', 'Welcome to the Other Lobby!')]
+	})
+
+	roomsTable.insert({
+		'id': 'ANOTHER',
+		'name': 'Another Lobby',
+		'members': [],
+		'messages': [createMessageObject('ADMIN', 'Admin', 'Welcome to Another Lobby!')]
 	})

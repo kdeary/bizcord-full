@@ -7,17 +7,21 @@ html, body {
 }
 
 #chatRoot .form-control {
-	border-color: transparent;
+/*	border-color: transparent;*/
 }
 
 #chatRoot .form-control:focus {
-	border-color: transparent;
+/*	border-color: transparent;*/
 	box-shadow: inset 0px 0px 0px 1px transparent;
 }
 
 #chatRoot .card-body {
 	position: relative;
 	height: 50vh;
+}
+
+#chatMessage {
+	border-color: transparent;
 }
 
 .badge-dot {
