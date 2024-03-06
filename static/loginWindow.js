@@ -23,9 +23,7 @@ ELEMENTS.LOGIN_BUTTON.addEventListener('click', async event => {
 });
 
 async function getSession() {
-	const response = await window.Fetch('/get_session', {
-		method: 'POST'
-	});
+	const response = await window.Fetch('/get_session');
 
 	if(response.user) {
 		window.USER_SESSION = response.user;

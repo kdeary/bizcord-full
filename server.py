@@ -17,7 +17,7 @@ def send_static(path):
 	return send_from_directory('static', path)
 
 # Session route
-@app.route('/get_session', methods=['POST'])
+@app.route('/get_session')
 def getSession():
 	session_token = request.cookies.get('session_token')
 	
