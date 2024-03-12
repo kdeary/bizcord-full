@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, request, make_response
+from flask import Flask, render_template, send_from_directory, request, make_response, session
 from flask_sock import Sock
 from components.user_database import getUser, createUser, getUserBySessionToken, sendChatMessage, getRooms, getRoom
 import json
@@ -20,7 +20,7 @@ def send_static(path):
 @app.route('/get_session')
 def getSession():
 	session_token = request.cookies.get('session_token')
-	
+
 	foundUser = getUserBySessionToken(session_token)
 	return json.dumps({
 		'user': foundUser

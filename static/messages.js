@@ -21,7 +21,7 @@ document.addEventListener('login', async () => {
 			</div>
 			<div class="pt-1">
 				<p class="fw-bold mb-0">${room.name}</p>
-				<p class="small text-muted">${sanitizeHtml(room.messages[room.messages.length - 1].body.slice(0, 32))}</p>
+				<p class="small text-muted">${(room.messages[room.messages.length - 1].body.slice(0, 32))}</p>
 			</div>
 		</div>
 	</a>
@@ -111,7 +111,7 @@ function createMessageElem(authorID, name, message, date) {
 		<img src="${authorID === 'ADMIN' ? 'http://localhost:5000/static/logo.svg' : window.getAvatarURL(authorID.charCodeAt(0))}"
 			alt="avatar 1" style="width: 48px; margin-right: 16px;">
 		<div>
-			<p class="small p-2 ${isSelfSent ? 'me-3' : 'ms-3'} mb-1 rounded-3 bg-${isSelfSent ? 'primary' : 'secondary'}">${sanitizeHtml(message)}</p>
+			<p class="small p-2 ${isSelfSent ? 'me-3' : 'ms-3'} mb-1 rounded-3 bg-${isSelfSent ? 'primary' : 'secondary'}">${(message)}</p>
 			<p class="small ${isSelfSent ? 'me-3' : 'ms-3'} mb-3 rounded-3 text-muted float-end">${name} | ${dateObj.toLocaleTimeString()} | ${dateObj.toDateString()}</p>
 		</div>
 	</div>`;
